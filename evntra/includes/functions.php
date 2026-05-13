@@ -44,7 +44,7 @@ function app_config(): array
         'db_name' => app_env('DB_NAME', 'unicompete_hub'),
         'db_user' => app_env('DB_USER', 'root'),
         'db_pass' => app_env('DB_PASS', ''),
-        'app_url' => rtrim((string) app_env('APP_URL', 'http://localhost/unicompete-hub'), '/'),
+        'app_url' => rtrim((string) app_env('APP_URL', 'http://localhost/evntra'), '/'),
         'smtp_host' => app_env('SMTP_HOST', ''),
         'smtp_port' => (int) app_env('SMTP_PORT', 587),
         'smtp_user' => app_env('SMTP_USER', ''),
