@@ -1,0 +1,39 @@
+.calendar-card {
+  min-height: 720px;
+}
+
+#competition-calendar {
+  min-height: 640px;
+}
+
+.fc {
+  color: var(--text-primary);
+}
+
+.fc .fc-toolbar-title,
+.fc .fc-col-header-cell-cushion,
+.fc .fc-daygrid-day-number {
+  color: var(--text-primary);
+}
+
+.fc .fc-button {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  box-shadow: none;
+}
+
+.fc .fc-button:hover,
+.fc .fc-button:focus,
+.fc .fc-button.fc-button-active {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+.fc .fc-daygrid-event,
+.fc .fc-timegrid-event {
+  border: none;
+  border-radius: 10px;
+  padding: 0.25rem 0.4rem;
+  font-weight: 700;
+}

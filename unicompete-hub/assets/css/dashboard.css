@@ -1,0 +1,96 @@
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 1.25rem;
+}
+
+.chart-card {
+  min-height: 320px;
+}
+
+.chart-wrap {
+  position: relative;
+  min-height: 280px;
+}
+
+.auth-layout,
+.two-column-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 1.25rem;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.filter-layout {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 1.25rem;
+}
+
+.multi-step {
+  display: grid;
+  gap: 1rem;
+}
+
+.step-indicator {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.step-pill {
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+}
+
+.step-pill.active {
+  background: var(--accent-primary);
+  color: #fff;
+}
+
+.step-panel {
+  display: none;
+}
+
+.step-panel.active {
+  display: block;
+}
+
+.inline-checks {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.inline-checks label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+@media (max-width: 1100px) {
+  .dashboard-grid,
+  .auth-layout,
+  .two-column-layout,
+  .filter-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .kpi-grid {
+    grid-template-columns: 1fr;
+  }
+}
