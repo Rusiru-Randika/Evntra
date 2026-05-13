@@ -1,3 +1,3 @@
 .vscode/
-evntra/.env
-evntra/vendor/
+src/.env
+src/vendor/
