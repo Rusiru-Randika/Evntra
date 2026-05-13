@@ -732,8 +732,10 @@ function competition_search_query(array $filters): array
     $offset = ($page - 1) * $perPage;
 
     $countSql = 'SELECT COUNT(*) FROM competitions c INNER JOIN users u ON c.organizer_id = u.id WHERE ' . $whereSql;
+    $countParams = $params;
+    unset($countParams[':user_id']);
     $countStmt = app_pdo()->prepare($countSql);
-    foreach ($params as $key => $value) {
+    foreach ($countParams as $key => $value) {
         $countStmt->bindValue($key, $value);
     }
     $countStmt->execute();
