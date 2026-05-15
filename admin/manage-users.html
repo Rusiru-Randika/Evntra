@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users - Evntra</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-brand">
+                    <h1 class="logo">Evntra</h1>
+                </div>
+                <ul class="nav-links"></ul>
+            </div>
+        </nav>
+
+        <div class="container" style="margin-top: 40px; margin-bottom: 60px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                <h1>Manage Users</h1>
+                <button class="btn btn-primary" onclick="alert('Add user feature coming soon')">Add User</button>
+            </div>
+
+            <!-- Filters -->
+            <div class="card" style="margin-bottom: 30px;">
+                <div class="card-body">
+                    <div class="grid" style="grid-template-columns: 1fr 1fr 1fr;">
+                        <div class="form-group">
+                            <label for="roleFilter">Role</label>
+                            <select id="roleFilter" onchange="filterUsers()">
+                                <option value="">All Roles</option>
+                                <option value="student">Student</option>
+                                <option value="organizer">Organizer</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="statusFilter">Status</label>
+                            <select id="statusFilter" onchange="filterUsers()">
+                                <option value="">All</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="searchUser">Search</label>
+                            <input type="text" id="searchUser" placeholder="Search by name or email..." onkeyup="filterUsers()">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Table -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Joined</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Jane Smith</td>
+                                    <td>jane@example.com</td>
+                                    <td><span class="badge badge-primary">Student</span></td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td>Dec 20, 2025</td>
+                                    <td>
+                                        <button class="btn btn-small" onclick="alert('View profile')">View</button>
+                                        <button class="btn btn-small btn-danger" onclick="alert('Deactivate?')">Deactivate</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Mike Johnson</td>
+                                    <td>mike@example.com</td>
+                                    <td><span class="badge badge-primary">Organizer</span></td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td>Jan 05, 2026</td>
+                                    <td>
+                                        <button class="btn btn-small" onclick="alert('View profile')">View</button>
+                                        <button class="btn btn-small btn-danger" onclick="alert('Deactivate?')">Deactivate</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>&copy; 2026 Evntra. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../assets/js/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+            loadUsers();
+        });
+
+        async function loadUsers() {
+            try {
+                // TODO: Call API to load users
+                console.log('Loading users...');
+            } catch (error) {
+                console.error('Error loading users:', error);
+            }
+        }
+
+        function filterUsers() {
+            alert('Filtering functionality coming soon');
+        }
+
+        function checkAuthStatus() {
+            const user = JSON.parse(localStorage.getItem('user') || 'null');
+            const token = localStorage.getItem('token');
+            
+            if (!user || !token || user.role !== 'admin') {
+                window.location.href = '/?page=login';
+                return;
+            }
+
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks) {
+                navLinks.innerHTML = `
+                    <li><a href="#" class="nav-link" onclick="navigateTo('admin-dashboard')">Dashboard</a></li>
+                    <li><a href="#" class="nav-link" onclick="logout()">Logout</a></li>
+                `;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('user');
+            localStorage.removeItem('token');
+            window.location.href = '/index.html';
+        }
+
+        function navigateTo(page) {
+            window.location.href = `/?page=${page}`;
+        }
+    </script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

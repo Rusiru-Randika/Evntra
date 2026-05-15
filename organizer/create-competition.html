@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Competition - Evntra</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-brand">
+                    <h1 class="logo">Evntra</h1>
+                </div>
+                <ul class="nav-links"></ul>
+            </div>
+        </nav>
+
+        <div class="container" style="max-width: 800px; margin-top: 40px; margin-bottom: 60px;">
+            <h1 style="margin-bottom: 30px;">Create New Competition</h1>
+
+            <div class="card">
+                <form class="card-body" onsubmit="handleCreateCompetition(event)">
+                    <div class="grid grid-2" style="gap: 20px;">
+                        <div class="form-group">
+                            <label for="title">Competition Title *</label>
+                            <input type="text" id="title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category *</label>
+                            <select id="category" name="category" required>
+                                <option value="">Select...</option>
+                                <option value="academic">Academic</option>
+                                <option value="sports">Sports</option>
+                                <option value="technical">Technical</option>
+                                <option value="cultural">Cultural</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description *</label>
+                        <textarea id="description" name="description" required placeholder="Describe your competition..."></textarea>
+                    </div>
+
+                    <div class="grid grid-2">
+                        <div class="form-group">
+                            <label for="startDate">Start Date *</label>
+                            <input type="date" id="startDate" name="startDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="endDate">End Date *</label>
+                            <input type="date" id="endDate" name="endDate" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-2">
+                        <div class="form-group">
+                            <label for="maxParticipants">Max Participants</label>
+                            <input type="number" id="maxParticipants" name="maxParticipants" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="difficulty">Difficulty Level</label>
+                            <select id="difficulty" name="difficulty">
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rules">Rules & Guidelines *</label>
+                        <textarea id="rules" name="rules" required placeholder="Enter competition rules..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prizes">Prizes & Rewards</label>
+                        <textarea id="prizes" name="prizes" placeholder="Describe the prizes..."></textarea>
+                    </div>
+
+                    <div style="display: flex; gap: 15px; margin-top: 30px;">
+                        <button type="submit" class="btn btn-primary">Create Competition</button>
+                        <button type="button" class="btn btn-secondary" onclick="navigateTo('organizer-dashboard')">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>&copy; 2026 Evntra. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../assets/js/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+        });
+
+        async function handleCreateCompetition(event) {
+            event.preventDefault();
+
+            const formData = {
+                title: document.getElementById('title').value,
+                category: document.getElementById('category').value,
+                description: document.getElementById('description').value,
+                startDate: document.getElementById('startDate').value,
+                endDate: document.getElementById('endDate').value,
+                maxParticipants: document.getElementById('maxParticipants').value,
+                difficulty: document.getElementById('difficulty').value,
+                rules: document.getElementById('rules').value,
+                prizes: document.getElementById('prizes').value,
+            };
+
+            try {
+                const response = await fetch('/api/competitions.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'create', ...formData })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('Competition created successfully!');
+                    navigateTo('organizer-dashboard');
+                } else {
+                    alert(data.message || 'Failed to create competition');
+                }
+            } catch (error) {
+                console.error('Error creating competition:', error);
+                alert('An error occurred. Please try again.');
+            }
+        }
+
+        function checkAuthStatus() {
+            const user = JSON.parse(localStorage.getItem('user') || 'null');
+            const token = localStorage.getItem('token');
+            
+            if (!user || !token || user.role !== 'organizer') {
+                window.location.href = '/?page=login';
+                return;
+            }
+
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks) {
+                navLinks.innerHTML = `
+                    <li><a href="#" class="nav-link" onclick="navigateTo('organizer-dashboard')">Dashboard</a></li>
+                    <li><a href="#" class="nav-link" onclick="logout()">Logout</a></li>
+                `;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('user');
+            localStorage.removeItem('token');
+            window.location.href = '/index.html';
+        }
+
+        function navigateTo(page) {
+            window.location.href = `/?page=${page}`;
+        }
+    </script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

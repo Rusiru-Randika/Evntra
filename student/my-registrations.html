@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Registrations - Evntra</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-brand">
+                    <h1 class="logo">Evntra</h1>
+                </div>
+                <ul class="nav-links"></ul>
+            </div>
+        </nav>
+
+        <div class="container" style="margin-top: 40px; margin-bottom: 60px;">
+            <h1 style="margin-bottom: 30px;">My Registrations</h1>
+            
+            <!-- Filters -->
+            <div class="card" style="margin-bottom: 30px;">
+                <div class="card-body">
+                    <div class="grid" style="grid-template-columns: 1fr 1fr 1fr;">
+                        <div class="form-group">
+                            <label for="filterStatus">Filter by Status</label>
+                            <select id="filterStatus">
+                                <option value="">All</option>
+                                <option value="pending">Pending</option>
+                                <option value="approved">Approved</option>
+                                <option value="ongoing">Ongoing</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="filterCategory">Category</label>
+                            <select id="filterCategory">
+                                <option value="">All Categories</option>
+                                <option value="academic">Academic</option>
+                                <option value="sports">Sports</option>
+                                <option value="technical">Technical</option>
+                                <option value="cultural">Cultural</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <button class="btn btn-primary" style="width: 100%;">Apply Filters</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registrations Table -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Competition</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                    <th>Registered On</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Web Development Championship</td>
+                                    <td>Technical</td>
+                                    <td><span class="badge badge-success">Approved</span></td>
+                                    <td>Jan 15, 2026</td>
+                                    <td>
+                                        <button class="btn btn-small" onclick="alert('View details')">View</button>
+                                        <button class="btn btn-small btn-danger" onclick="alert('Unregister?')">Unregister</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Innovation Hackathon</td>
+                                    <td>Technical</td>
+                                    <td><span class="badge badge-warning">Pending</span></td>
+                                    <td>Jan 10, 2026</td>
+                                    <td>
+                                        <button class="btn btn-small" onclick="alert('View details')">View</button>
+                                        <button class="btn btn-small btn-danger" onclick="alert('Unregister?')">Unregister</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p style="text-align: center; color: #95a5a6; margin-top: 20px;">
+                        <a href="#" onclick="navigateTo('browse')" style="color: #3498db;">Browse more competitions →</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>&copy; 2026 Evntra. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../assets/js/api.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

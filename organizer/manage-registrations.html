@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Registrations - Evntra</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-brand">
+                    <h1 class="logo">Evntra</h1>
+                </div>
+                <ul class="nav-links"></ul>
+            </div>
+        </nav>
+
+        <div class="container" style="margin-top: 40px; margin-bottom: 60px;">
+            <h1 style="margin-bottom: 30px;">Manage Registrations</h1>
+
+            <div class="card" style="margin-bottom: 30px;">
+                <div class="card-body">
+                    <div class="grid" style="grid-template-columns: 1fr 1fr auto;">
+                        <div class="form-group">
+                            <label for="competitionFilter">Select Competition</label>
+                            <select id="competitionFilter" onchange="filterRegistrations()">
+                                <option value="">All Competitions</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="statusFilter">Status</label>
+                            <select id="statusFilter" onchange="filterRegistrations()">
+                                <option value="">All</option>
+                                <option value="pending">Pending</option>
+                                <option value="approved">Approved</option>
+                                <option value="rejected">Rejected</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="margin-top: 1.5rem;">
+                            <button class="btn btn-primary">Export</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="grid grid-3" style="margin-bottom: 30px;">
+                <div class="card">
+                    <div class="card-body">
+                        <p style="color: #95a5a6; margin: 0 0 10px 0;">Total Registrations</p>
+                        <p style="font-size: 2rem; font-weight: bold; color: #2c3e50; margin: 0;">0</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <p style="color: #95a5a6; margin: 0 0 10px 0;">Approved</p>
+                        <p style="font-size: 2rem; font-weight: bold; color: #2ecc71; margin: 0;">0</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <p style="color: #95a5a6; margin: 0 0 10px 0;">Pending</p>
+                        <p style="font-size: 2rem; font-weight: bold; color: #f39c12; margin: 0;">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registrations Table -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Participant</th>
+                                    <th>Email</th>
+                                    <th>Competition</th>
+                                    <th>Status</th>
+                                    <th>Registered</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>John Doe</td>
+                                    <td>john@example.com</td>
+                                    <td>Web Dev Championship</td>
+                                    <td><span class="badge badge-success">Approved</span></td>
+                                    <td>Jan 15, 2026</td>
+                                    <td>
+                                        <button class="btn btn-small" onclick="alert('View profile')">View</button>
+                                        <button class="btn btn-small btn-danger" onclick="alert('Remove?')">Remove</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>&copy; 2026 Evntra. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="../assets/js/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+            loadCompetitions();
+        });
+
+        async function loadCompetitions() {
+            try {
+                const response = await fetch('/api/competitions.php');
+                const data = await response.json();
+                
+                const filter = document.getElementById('competitionFilter');
+                if (data.competitions) {
+                    data.competitions.forEach(comp => {
+                        const option = document.createElement('option');
+                        option.value = comp.id;
+                        option.textContent = comp.title;
+                        filter.appendChild(option);
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading competitions:', error);
+            }
+        }
+
+        function filterRegistrations() {
+            alert('Filtering functionality coming soon');
+        }
+
+        function checkAuthStatus() {
+            const user = JSON.parse(localStorage.getItem('user') || 'null');
+            const token = localStorage.getItem('token');
+            
+            if (!user || !token || user.role !== 'organizer') {
+                window.location.href = '/?page=login';
+                return;
+            }
+
+            const navLinks = document.querySelector('.nav-links');
+            if (navLinks) {
+                navLinks.innerHTML = `
+                    <li><a href="#" class="nav-link" onclick="navigateTo('organizer-dashboard')">Dashboard</a></li>
+                    <li><a href="#" class="nav-link" onclick="logout()">Logout</a></li>
+                `;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('user');
+            localStorage.removeItem('token');
+            window.location.href = '/index.html';
+        }
+
+        function navigateTo(page) {
+            window.location.href = `/?page=${page}`;
+        }
+    </script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

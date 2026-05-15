@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evntra - Competition Management Platform</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/landing.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-brand">
+                    <h1 class="logo">Evntra</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link" onclick="navigateTo('student-dashboard')">Browse</a></li>
+                    <li><a href="#" class="nav-link" onclick="navigateTo('student-dashboard')">Dashboard</a></li>
+                    <li><a href="#" class="nav-link" onclick="navigateTo('login')">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Discover and Participate in Amazing Competitions</h1>
+                    <p class="hero-subtitle">Join competitions across multiple disciplines and showcase your skills</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="navigateTo('browse')">Browse Competitions</button>
+                        <button class="btn btn-secondary" onclick="navigateTo('register')">Create Account</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="hero-placeholder">
+                        <svg viewBox="0 0 400 300" class="illustration">
+                            <rect width="400" height="300" fill="#f0f4ff"/>
+                            <circle cx="200" cy="150" r="80" fill="#3498db" opacity="0.2"/>
+                            <circle cx="100" cy="100" r="50" fill="#2ecc71" opacity="0.2"/>
+                            <circle cx="300" cy="200" r="60" fill="#e74c3c" opacity="0.2"/>
+                            <text x="200" y="160" text-anchor="middle" font-size="24" fill="#34495e">Competitions</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">Why Choose Evntra?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Real-time Analytics</h3>
+                        <p>Track competition performance and participant engagement with detailed insights</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Easy Registration</h3>
+                        <p>Simple and streamlined registration process for participants and organizers</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>Responsive Design</h3>
+                        <p>Access competitions on any device with our mobile-friendly platform</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Secure Platform</h3>
+                        <p>Enterprise-grade security to protect your data and competition integrity</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <div class="container">
+                <h2>Ready to Get Started?</h2>
+                <p>Join thousands of participants and organizers on Evntra</p>
+                <button class="btn btn-primary btn-large" onclick="navigateTo('register')">Sign Up Now</button>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h4>Evntra</h4>
+                        <p>Competition management made simple</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="#" onclick="navigateTo('browse')">Browse</a></li>
+                            <li><a href="#" onclick="navigateTo('register')">Register</a></li>
+                            <li><a href="#" onclick="navigateTo('login')">Login</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2026 Evntra. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
