@@ -158,7 +158,34 @@ h5,
 
 .btn,
 button,
+input[type="submit"], input, textarea, select {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.8rem;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px rgba(108,99,255,0.2);
+}
 input[type="submit"] {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+.btn:focus {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.nav-link:focus {
+  background: rgba(108, 99, 255, 0.12);
+  color: var(--text-primary);
+}
   border: 0;
   cursor: pointer;
   font: inherit;
@@ -216,11 +243,6 @@ input[type="submit"] {
   text-transform: uppercase;
 }
 
-.form-group {
-  display: grid;
-  gap: 0.45rem;
-  margin-bottom: 1rem;
-}
 
 label {
   font-weight: 700;

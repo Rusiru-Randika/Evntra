@@ -15,6 +15,24 @@ function app_root_path(string $path = ''): string
     return $path === '' ? $root : $root . '/' . ltrim($path, '/');
 }
 
+function url(string $path = ''): string
+{
+    static $basePath = null;
+    if ($basePath === null) {
+        $projectRoot = str_replace('\\', '/', dirname(__DIR__));
+        $docRoot = rtrim(str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT'] ?? ''), '/');
+        
+        if ($docRoot !== '' && stripos($projectRoot, $docRoot) === 0) {
+            $subDir = substr($projectRoot, strlen($docRoot));
+            $basePath = '/' . ltrim(str_replace('\\', '/', $subDir), '/');
+            $basePath = rtrim($basePath, '/');
+        } else {
+            $basePath = '';
+        }
+    }
+    return $basePath . '/' . ltrim($path, '/');
+}
+
 function app_env(string $key, mixed $default = null): mixed
 {
     static $env = null;
@@ -80,6 +98,9 @@ function e(?string $value): string
 
 function redirect(string $url): never
 {
+    if (str_starts_with($url, '/')) {
+        $url = url($url);
+    }
     header('Location: ' . $url);
     exit;
 }

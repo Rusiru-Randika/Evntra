@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/functions.php';
 
+ob_start(function ($buffer) {
+    $basePath = rtrim(url(), '/');
+    if ($basePath === '' || $basePath === '/') {
+        return $buffer;
+    }
+    $pattern = '/(href|src|action)="\/((?!' . preg_quote(ltrim($basePath, '/'), '/') . ')[^"]*)"/i';
+    $replacement = '$1="' . $basePath . '/$2"';
+    return preg_replace($pattern, $replacement, $buffer);
+});
+
 app_start_session();
 $pdo = app_pdo();
 $currentUser = is_logged_in() ? current_user() : null;
@@ -22,6 +32,22 @@ $bodyClass = $bodyClass ?? '';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="<?= e($pageDescription) ?>">
     <title><?= e($pageTitle) ?></title>
+    <script>
+        (function() {
+            const basePath = '<?= e(rtrim(url(), "/")) ?>';
+            if (basePath && basePath !== '/') {
+                const originalFetch = window.fetch;
+                window.fetch = function(input, init) {
+                    if (typeof input === 'string' && input.startsWith('/api/')) {
+                        input = basePath + input;
+                    } else if (input instanceof URL && input.pathname.startsWith('/api/')) {
+                        input.pathname = basePath + input.pathname;
+                    }
+                    return originalFetch(input, init);
+                };
+            }
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">

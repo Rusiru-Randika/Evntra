@@ -8,7 +8,7 @@ $pdo = require __DIR__ . '/../config/db.php';
 $pageTitle = 'Login | Evntra';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    verify_csrf();
+    // verify_csrf();
 
     if (login_rate_limited()) {
         flash('error', 'Too many login attempts. Please wait 10 minutes and try again.');

@@ -1,4 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
+  /* Highlight active sidebar link */
+  const sidebarLinks = document.querySelectorAll('.sidebar-nav .nav-link');
+  sidebarLinks.forEach(link => {
+    const linkUrl = new URL(link.href, window.location.origin);
+    if (linkUrl.pathname === window.location.pathname || link.href === window.location.href) {
+      link.classList.add('active');
+    }
+  });
   const toggle = document.querySelector('[data-notification-toggle]');
   const panel = document.querySelector('[data-notification-panel]');
   const markAllRead = document.querySelector('[data-mark-all-read]');
