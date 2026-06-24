@@ -38,25 +38,9 @@ include __DIR__ . '/../includes/header.php';
 ?>
 <section class="auth-layout">
     <div class="hero-panel">
-
-        <span class="badge">Centralized competition hub</span>
-        <h1>Sign in to the <span class="gradient-text">Arena</span></h1>
-        <p>Manage every university competition in one place - track registrations, bookmarks, conflict warnings, and organizer analytics.</p>
-
-        <div class="auth-features">
-            <div class="auth-feature">
-                <span class="auth-feature-icon material-symbols-outlined">trophy</span>
-                <span class="auth-feature-label"><strong>6 Live Competitions</strong> - browse & register instantly</span>
-            </div>
-            <div class="auth-feature">
-                <span class="auth-feature-icon material-symbols-outlined">groups</span>
-                <span class="auth-feature-label"><strong>3 User Roles</strong> - student, organizer, admin</span>
-            </div>
-            <div class="auth-feature">
-                <span class="auth-feature-icon material-symbols-outlined">warning</span>
-                <span class="auth-feature-label"><strong>Conflict Detection</strong> - automatic schedule clash alerts</span>
-            </div>
-        </div>
+        <span class="badge" style="background:rgba(108,99,255,0.2);">Centralized competition hub</span>
+        <h1>Sign in to manage every university competition in one place.</h1>
+        <p>Track registrations, bookmarks, conflict warnings, and organizer analytics from a single account.</p>
     </div>
     <div class="form-card">
         <h2>Welcome back</h2>
@@ -76,14 +60,7 @@ include __DIR__ . '/../includes/header.php';
                 <a class="btn btn-outline" href="/auth/forgot-password.php" style="width:100%; text-align:center;">Forgot password?</a>
             </div>
         </form>
-        <div class="auth-divider">or</div>
-        <p class="small-text">Don't have an account? <a href="/auth/register.php">Create one here</a></p>
-        <div class="auth-trust">
-            <span class="auth-trust-item"><span class="material-symbols-outlined">lock</span> Secure login</span>
-            <span class="auth-trust-item"><span class="material-symbols-outlined">verified</span> Verified platform</span>
-            <span class="auth-trust-item"><span class="material-symbols-outlined">speed</span> Fast access</span>
-        </div>
-        <p class="small-text" style="margin-top:1rem; font-size:0.78rem; opacity:0.7;">Demo: student@evntra.test / Student123!</p>
+        <p class="small-text">No account yet? <a href="/auth/register.php">Create one here</a>.</p>
     </div>
 </section>
 <?php include __DIR__ . '/../includes/footer.php'; ?>
